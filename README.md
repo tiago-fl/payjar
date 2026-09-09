@@ -1,10 +1,10 @@
-# 🍪 CookiePay — payment links & on-chain receipts for Cookie Chain
+# 🍪 PayJar — payment links & on-chain receipts for Cookie Chain
 
-**Live app:** https://tiago-fl.github.io/cookiepay/  
+**Live app:** https://tiago-fl.github.io/payjar/  
 **Deploy:** `npm run build` → contents of `dist/` pushed to the `gh-pages` branch (GitHub Pages, legacy source).  
 **Network:** Cookie Chain (SVM) · RPC `https://rpc.cookiescan.io` · Explorer [cookiescan.io](https://cookiescan.io)
 
-CookiePay is a Solana-Pay-style payment tool built natively for Cookie Chain. A merchant, creator or friend
+PayJar is a Solana-Pay-style payment tool built natively for Cookie Chain. A merchant, creator or friend
 creates a payment request (amount + token + label), shares a link or QR code, and the payer settles it with
 one transaction from [Nightly](https://nightly.app). The payment is found on-chain through a unique
 *reference key* embedded in the transaction — so receipts, "paid" status and the merchant dashboard work
@@ -16,7 +16,7 @@ with **no backend, no database and no accounts**. The chain is the source of tru
 | --- | --- |
 | **Payment links & QR codes** | Amount, token (native COOK, any SPL / Token-2022 mint), label and message are encoded in the URL. A fresh reference public key is generated in the browser for every link. |
 | **`.cook` names as recipients** | `bakery.cook` resolves through the CookOven name-service program (`H43Qtq4A…`), honouring the resolver field when set. Connected wallets are prefilled with their primary name. |
-| **One-transaction checkout** | `SystemProgram.transfer` (COOK) or `TransferChecked` (SPL) with an idempotent ATA creation for the recipient, + the reference account, + a Memo `cookiepay\|label\|message`. |
+| **One-transaction checkout** | `SystemProgram.transfer` (COOK) or `TransferChecked` (SPL) with an idempotent ATA creation for the recipient, + the reference account, + a Memo `payjar\|label\|message`. |
 | **Real-time status** | Building → signature → sent → **confirmed** → **finalized**, with the explorer link as soon as the signature exists. Errors (rejected, insufficient funds, expired blockhash…) are explained in plain words. |
 | **Balance-aware** | Before paying, the app checks COOK for fees, the token balance and the ~0.002 COOK rent if the recipient's token account must be created. If the payer lacks the token it asks the **Cookiebox aggregator** (`agg.cookiebox.app/quote`) how much COOK the amount is worth and points to Cookiebox / the bridge. |
 | **On-chain receipts** | `#/receipt?ref=…` polls `getSignaturesForAddress(reference)` until the payment lands, then shows amount, payer, label/message from the memo, slot, fee and finality. Shareable. |
@@ -29,7 +29,7 @@ transaction itself, so the wallet's own RPC setting can never redirect a payment
 ## Ecosystem integrations
 
 - **Nightly wallet** via the Wallet Standard (`standard:connect`, `solana:signTransaction`), plus Nightly's
-  `changeNetwork` API: if the wallet is on another network, CookiePay asks it to switch to Cookie Chain
+  `changeNetwork` API: if the wallet is on another network, PayJar asks it to switch to Cookie Chain
   (genesis `9wDaBRDg…`, RPC `rpc.cookiescan.io`) with one click. Any other
   wallet-standard Solana wallet works too.
 - **CookOven `.cook` names** — on-chain PDA reads (`["domain", label]`, `["primary", owner]`).
@@ -41,8 +41,8 @@ transaction itself, so the wallet's own RPC setting can never redirect a payment
 ## Run it locally
 
 ```bash
-git clone https://github.com/tiago-fl/cookiepay.git
-cd cookiepay
+git clone https://github.com/tiago-fl/payjar.git
+cd payjar
 npm install
 npm run dev          # http://localhost:5173
 npm run build        # static site in dist/
@@ -83,7 +83,7 @@ src/
 | CookOven name service | `H43Qtq4AMQ86y7yc3YtCKZJ2QMhhnCcHyZKeFeoQn7PA` |
 | SPL Token / Token-2022 / ATA | canonical program ids (genesis-embedded on Cookie Chain) |
 
-No custom program is deployed: CookiePay composes the chain's genesis programs, which keeps it
+No custom program is deployed: PayJar composes the chain's genesis programs, which keeps it
 trust-minimised and free to run.
 
 ## Security notes

@@ -42,7 +42,7 @@ export default function App() {
   return (
     <WalletProvider>
       <header className="topbar">
-        <a className="brand" href="#/">🍪 <span>CookiePay</span></a>
+        <a className="brand" href="#/">🍪 <span>PayJar</span></a>
         <nav>
           <a href="#/" className={route.path === '/' ? 'active' : ''}>Create</a>
           <a href="#/dashboard" className={route.path === '/dashboard' ? 'active' : ''}>Dashboard</a>
@@ -56,7 +56,7 @@ export default function App() {
       <footer className="footer">
         <span>Open source · MIT · built for the Cookie Chain cApp bounty</span>
         <span>
-          <a href="https://github.com/tiago-fl/cookiepay" target="_blank" rel="noreferrer">GitHub</a> ·{' '}
+          <a href="https://github.com/tiago-fl/payjar" target="_blank" rel="noreferrer">GitHub</a> ·{' '}
           <a href="https://docs.cookiechain.wtf" target="_blank" rel="noreferrer">Cookie Chain docs</a> ·{' '}
           <a href="https://hyperlane.cookiescan.io" target="_blank" rel="noreferrer">Bridge COOK</a>
         </span>

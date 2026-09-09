@@ -136,7 +136,7 @@ export function Dashboard({ params }: { params: URLSearchParams }) {
         <div className="stat">
           <div className="stat-label">Incoming transfers</div>
           <div className="stat-value">{payments ? payments.length : '…'}</div>
-          <div className="muted small">{cookiePayCount} via CookiePay links · last 80 txs</div>
+          <div className="muted small">{cookiePayCount} via PayJar links · last 80 txs</div>
         </div>
         {totals.slice(0, 2).map(([mint, t]) => (
           <div className="stat" key={mint}>

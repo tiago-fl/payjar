@@ -1,12 +1,12 @@
 # X thread (required by the bounty) — post from your account, then share the thread link in the Cookie Chain Telegram
 
-1/ 🍪 Meet CookiePay — payment links for @TheCookieChain.
+1/ 🍪 Meet PayJar — payment links for @TheCookieChain.
 
 Create a link or QR for COOK or any SPL token, share it, get paid in one Nightly transaction, and get an on-chain receipt the second it confirms.
 
 No backend. No account. The chain is the database.
 
-👉 https://tiago-fl.github.io/cookiepay/
+👉 https://tiago-fl.github.io/payjar/
 
 2/ How it works: every request embeds a unique *reference key* in the transfer instruction (the Solana Pay trick).
 
@@ -30,6 +30,6 @@ Public read-only view of any address: /#/dashboard?address=book.cook
 Then install Nightly (https://nightly.app), add RPC https://rpc.cookiescan.io and you are ready to pay or get paid.
 
 7/ Open source, MIT, no custom program — it composes the genesis programs (System, SPL Token, Token-2022, Memo).
-Code: https://github.com/tiago-fl/cookiepay
+Code: https://github.com/tiago-fl/payjar
 
 Built for the Cookie Chain cApp bounty on @SuperteamEarn 🍪

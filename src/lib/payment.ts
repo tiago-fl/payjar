@@ -28,7 +28,7 @@ export interface PaymentRequest {
   ref: string // reference pubkey (base58)
 }
 
-export const MEMO_PREFIX = 'cookiepay'
+export const MEMO_PREFIX = 'payjar'
 
 export function newReference(): string {
   return Keypair.generate().publicKey.toBase58()
@@ -215,7 +215,7 @@ export function parseMemo(tx: ParsedTransactionWithMeta): string | null {
   return null
 }
 
-/** Split a CookiePay memo ("cookiepay|label|message") into its parts; null for other memos. */
+/** Split a PayJar memo ("payjar|label|message") into its parts; null for other memos. */
 export function parseCookieMemo(memo: string | null): { label: string; message: string } | null {
   if (!memo) return null
   const m = memo.replace(/^\[\d+\]\s*/, '') // getSignaturesForAddress prefixes "[len] "

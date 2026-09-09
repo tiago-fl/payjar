@@ -208,7 +208,7 @@ function PayInner({ request }: { request: PaymentRequest }) {
               {busy ? 'Processing…' : stage === 'error' ? 'Try again' : `Pay ${request.amount} ${token?.symbol ?? ''}`}
             </button>
             <p className="muted small center">
-              You will sign one transaction: transfer + on-chain reference + memo “{request.label || 'cookiepay'}”. Nothing else.
+              You will sign one transaction: transfer + on-chain reference + memo “{request.label || 'payjar'}”. Nothing else.
             </p>
           </>
         )}

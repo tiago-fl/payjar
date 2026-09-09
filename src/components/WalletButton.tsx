@@ -9,7 +9,7 @@ export function NetworkBanner() {
   if (onCookieChain !== false) return null
   return (
     <div className="callout warn">
-      Your Nightly wallet is on another network. CookiePay always sends to Cookie Chain, but the wallet will only
+      Your Nightly wallet is on another network. PayJar always sends to Cookie Chain, but the wallet will only
       show the right balance and simulation once it is switched.{' '}
       {canSwitchNetwork ? (
         <button className="btn btn-primary btn-sm" onClick={() => void switchToCookieChain().catch(() => undefined)}>

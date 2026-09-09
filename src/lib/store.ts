@@ -7,7 +7,7 @@ export interface SavedLink extends PaymentRequest {
   paidAt?: number | null
 }
 
-const KEY = 'cookiepay.links.v1'
+const KEY = 'payjar.links.v1'
 
 export function loadLinks(): SavedLink[] {
   try {

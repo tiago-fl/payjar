@@ -15,7 +15,7 @@ git worktree add -q --detach "$TMPD"
   git rm -rfq . >/dev/null 2>&1 || true
   cp -r "$OLDPWD/dist/." .
   git -c core.autocrlf=false add -A
-  git -c core.autocrlf=false commit -qm "Deploy CookiePay $(date -u +%Y-%m-%dT%H:%MZ)"
+  git -c core.autocrlf=false commit -qm "Deploy PayJar $(date -u +%Y-%m-%dT%H:%MZ)"
   git push -f "$REMOTE" gh-pages
 )
 git worktree remove --force "$TMPD"

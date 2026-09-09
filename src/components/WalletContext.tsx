@@ -33,7 +33,7 @@ export interface WalletState {
 }
 
 const Ctx = createContext<WalletState | null>(null)
-const LAST_WALLET_KEY = 'cookiepay.wallet'
+const LAST_WALLET_KEY = 'payjar.wallet'
 
 export function WalletProvider({ children }: { children: ReactNode }) {
   const [wallets, setWallets] = useState<Wallet[]>(() => listSolanaWallets())
