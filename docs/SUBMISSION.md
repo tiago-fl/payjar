@@ -1,6 +1,6 @@
 # Superteam Earn submission — "Create an App on Cookie Chain"
 
-STATUS: submitted on Superteam 2026-09-09 (editable until deadline). Still to add via Edit Submission: tweet link + demo transaction.
+STATUS (2026-09-09): submitted and updated on Superteam; X thread live (7 posts) and shared in the Cookie Chain Telegram; still to add: demo transaction link once the wallet has COOK.
 
 **Live application URL:** https://tiago-fl.github.io/payjar/
 **GitHub repository:** https://github.com/tiago-fl/payjar
@@ -8,8 +8,8 @@ STATUS: submitted on Superteam 2026-09-09 (editable until deadline). Still to ad
 System Program, SPL Token `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA`, Token-2022 `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb`,
 ATA `ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL`, Memo `MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr`,
 CookOven names `H43Qtq4AMQ86y7yc3YtCKZJ2QMhhnCcHyZKeFeoQn7PA`. RPC `https://rpc.cookiescan.io`.
-**Demo transaction:** https://cookiescan.io/tx/DEMO_TX_SIGNATURE
-**X thread:** https://x.com/YOUR_HANDLE/status/THREAD_ID
+**Demo transaction:** pending (receipt will appear at https://tiago-fl.github.io/payjar/#/receipt?ref=86MT7dMuLp99SsaSg978HzjdCGmBUZq7CXY6hWNtU3mk)
+**X thread:** https://x.com/tiagocrazymania/status/2097503975859798160
 
 ## Short description (for the form)
 
