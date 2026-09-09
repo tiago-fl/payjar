@@ -1,6 +1,7 @@
 # 🍪 CookiePay — payment links & on-chain receipts for Cookie Chain
 
 **Live app:** https://tiago-fl.github.io/cookiepay/  
+**Deploy:** `npm run build` → contents of `dist/` pushed to the `gh-pages` branch (GitHub Pages, legacy source).  
 **Network:** Cookie Chain (SVM) · RPC `https://rpc.cookiescan.io` · Explorer [cookiescan.io](https://cookiescan.io)
 
 CookiePay is a Solana-Pay-style payment tool built natively for Cookie Chain. A merchant, creator or friend
