@@ -6,7 +6,7 @@ import { findSignatureByReference, incomingPayments, parseCookieMemo, paymentUrl
 import { loadLinks, removeLink, updateLink, type SavedLink } from '../lib/store'
 import { cookUsdPrice, describeMint, type TokenInfo } from '../lib/tokens'
 import { AddressLink, CopyButton, Spinner, TxLink } from '../components/ui'
-import { WalletButton } from '../components/WalletButton'
+import { NetworkBanner, WalletButton } from '../components/WalletButton'
 import { useWallet } from '../components/WalletContext'
 
 /** Dashboard for the connected wallet, or a read-only view of any address / .cook name via `?address=`. */
@@ -148,6 +148,7 @@ export function Dashboard({ params }: { params: URLSearchParams }) {
       </div>
 
       {err && <p className="error">{err}</p>}
+      {!readOnly && <NetworkBanner />}
 
       <div className="grid-2">
         <div className="card">

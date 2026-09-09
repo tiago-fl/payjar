@@ -1,6 +1,8 @@
 import { Connection, PublicKey } from '@solana/web3.js'
 
 export const RPC_URL = 'https://rpc.cookiescan.io'
+/** Cookie Chain genesis hash — identifies the network to wallets (Nightly's changeNetwork). */
+export const COOKIE_GENESIS_HASH = '9wDaBRDgArEUpvhHxGguNkwozsZh4UpGZB9o2EoEcBB2'
 export const EXPLORER_URL = 'https://cookiescan.io'
 export const DAS_API_URL = 'https://api.cookiescan.io'
 export const COOKIEBOX_AGG_URL = 'https://agg.cookiebox.app'

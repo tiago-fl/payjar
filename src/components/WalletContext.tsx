@@ -1,10 +1,15 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { PublicKey, type Transaction } from '@solana/web3.js'
 import type { Wallet, WalletAccount } from '@wallet-standard/base'
+import { COOKIE_GENESIS_HASH, RPC_URL } from '../lib/chain'
 import {
+  NIGHTLY_NAME,
   connectWallet,
   disconnectWallet,
   listSolanaWallets,
+  nightlyCanSwitch,
+  nightlyOnNetwork,
+  nightlySwitchNetwork,
   onAccountChange,
   onWalletRegistry,
   signWithWallet,
@@ -18,8 +23,12 @@ export interface WalletState {
   publicKey: PublicKey | null
   connecting: boolean
   error: string | null
+  /** Nightly only: is the wallet currently pointed at Cookie Chain? null when unknown / not Nightly. */
+  onCookieChain: boolean | null
+  canSwitchNetwork: boolean
   connect: (w: Wallet) => Promise<void>
   disconnect: () => Promise<void>
+  switchToCookieChain: () => Promise<void>
   sign: (tx: Transaction) => Promise<Uint8Array>
 }
 
@@ -108,11 +117,49 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     [wallet, account],
   )
 
+  // Track which network Nightly is on; poll because the user can switch inside the extension.
+  const [onCookieChain, setOnCookieChain] = useState<boolean | null>(null)
+  useEffect(() => {
+    if (!wallet || wallet.name !== NIGHTLY_NAME) {
+      setOnCookieChain(null)
+      return
+    }
+    const tick = () => setOnCookieChain(nightlyOnNetwork(COOKIE_GENESIS_HASH))
+    tick()
+    const id = setInterval(tick, 2000)
+    return () => clearInterval(id)
+  }, [wallet, account])
+
+  const switchToCookieChain = useCallback(async () => {
+    setError(null)
+    try {
+      await nightlySwitchNetwork(COOKIE_GENESIS_HASH, RPC_URL)
+      setOnCookieChain(nightlyOnNetwork(COOKIE_GENESIS_HASH))
+    } catch (e) {
+      setError(walletErrorMessage(e))
+      throw e
+    }
+  }, [])
+
+  // Right after connecting Nightly on another network, offer the switch once automatically.
+  const [offered, setOffered] = useState(false)
+  useEffect(() => {
+    if (onCookieChain === false && !offered && nightlyCanSwitch()) {
+      setOffered(true)
+      void switchToCookieChain().catch(() => undefined)
+    }
+    if (onCookieChain !== false) setOffered(false)
+  }, [onCookieChain, offered, switchToCookieChain])
+
   const publicKey = useMemo(() => (account ? new PublicKey(account.publicKey) : null), [account])
 
   const value = useMemo<WalletState>(
-    () => ({ wallets, wallet, account, publicKey, connecting, error, connect, disconnect, sign }),
-    [wallets, wallet, account, publicKey, connecting, error, connect, disconnect, sign],
+    () => ({
+      wallets, wallet, account, publicKey, connecting, error,
+      onCookieChain, canSwitchNetwork: nightlyCanSwitch(),
+      connect, disconnect, switchToCookieChain, sign,
+    }),
+    [wallets, wallet, account, publicKey, connecting, error, onCookieChain, connect, disconnect, switchToCookieChain, sign],
   )
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }

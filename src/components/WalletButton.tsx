@@ -3,6 +3,25 @@ import { NIGHTLY_URL, shortAddr } from '../lib/chain'
 import { NIGHTLY_NAME } from '../lib/wallet'
 import { useWallet } from './WalletContext'
 
+/** Shown wherever a transaction is about to happen: nudges Nightly onto Cookie Chain. */
+export function NetworkBanner() {
+  const { onCookieChain, canSwitchNetwork, switchToCookieChain } = useWallet()
+  if (onCookieChain !== false) return null
+  return (
+    <div className="callout warn">
+      Your Nightly wallet is on another network. CookiePay always sends to Cookie Chain, but the wallet will only
+      show the right balance and simulation once it is switched.{' '}
+      {canSwitchNetwork ? (
+        <button className="btn btn-primary btn-sm" onClick={() => void switchToCookieChain().catch(() => undefined)}>
+          Switch Nightly to Cookie Chain
+        </button>
+      ) : (
+        <span>Set a custom SVM network with RPC <span className="mono">https://rpc.cookiescan.io</span> in the wallet settings.</span>
+      )}
+    </div>
+  )
+}
+
 export function WalletButton() {
   const { wallets, wallet, account, connecting, error, connect, disconnect } = useWallet()
   const [open, setOpen] = useState(false)

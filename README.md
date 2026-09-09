@@ -28,7 +28,9 @@ transaction itself, so the wallet's own RPC setting can never redirect a payment
 
 ## Ecosystem integrations
 
-- **Nightly wallet** via the Wallet Standard (`standard:connect`, `solana:signTransaction`). Any other
+- **Nightly wallet** via the Wallet Standard (`standard:connect`, `solana:signTransaction`), plus Nightly's
+  `changeNetwork` API: if the wallet is on another network, CookiePay asks it to switch to Cookie Chain
+  (genesis `9wDaBRDg…`, RPC `rpc.cookiescan.io`) with one click. Any other
   wallet-standard Solana wallet works too.
 - **CookOven `.cook` names** — on-chain PDA reads (`["domain", label]`, `["primary", owner]`).
 - **Cookiescan DAS API** — token registry, logos, decimals, COOK/USD price.

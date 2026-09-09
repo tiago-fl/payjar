@@ -67,6 +67,36 @@ export async function signWithWallet(wallet: Wallet, account: WalletAccount, tx:
   return out.signedTransaction
 }
 
+// --- Nightly network switching --------------------------------------------------------------
+// Nightly exposes a non-standard `changeNetwork` on its injected object: the dApp can ask the
+// wallet to switch to any SVM network by genesis hash + RPC (docs.nightly.app → change_network).
+type NightlySolana = {
+  genesisHash?: string
+  changeNetwork?: (n: { genesisHash: string; url?: string }) => Promise<unknown>
+}
+function nightlyObject(): NightlySolana | null {
+  const w = window as unknown as { nightly?: { solana?: NightlySolana } }
+  return w.nightly?.solana ?? null
+}
+
+/** true = Nightly is on Cookie Chain, false = on another network, null = not Nightly / unknown. */
+export function nightlyOnNetwork(genesisHash: string): boolean | null {
+  const n = nightlyObject()
+  if (!n || !n.genesisHash) return null
+  return n.genesisHash === genesisHash
+}
+
+export function nightlyCanSwitch(): boolean {
+  return typeof nightlyObject()?.changeNetwork === 'function'
+}
+
+/** Ask Nightly to switch to the given network (opens a confirmation popup in the extension). */
+export async function nightlySwitchNetwork(genesisHash: string, url: string): Promise<void> {
+  const n = nightlyObject()
+  if (!n?.changeNetwork) throw new Error('This wallet cannot switch networks from a dApp')
+  await n.changeNetwork({ genesisHash, url })
+}
+
 /** Human-friendly wallet error (user rejection etc.). */
 export function walletErrorMessage(e: unknown): string {
   const msg = e instanceof Error ? e.message : String(e)

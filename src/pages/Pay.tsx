@@ -16,7 +16,7 @@ import {
 import { updateLink } from '../lib/store'
 import { COOK_TOKEN, cookUsdPrice, describeMint, type TokenInfo } from '../lib/tokens'
 import { AddressLink, CopyField, TxLink, TxTimeline, type Stage } from '../components/ui'
-import { WalletButton } from '../components/WalletButton'
+import { NetworkBanner, WalletButton } from '../components/WalletButton'
 import { useWallet } from '../components/WalletContext'
 
 export function Pay({ params }: { params: URLSearchParams }) {
@@ -180,6 +180,7 @@ function PayInner({ request }: { request: PaymentRequest }) {
           </div>
         ) : (
           <>
+            <NetworkBanner />
             {balance && token && (
               <div className={`callout ${balance.ok ? '' : 'warn'}`}>
                 Your balance: <strong>{formatUnits(balance.balanceRaw, token.decimals, 6)} {token.symbol}</strong>
