@@ -1,6 +1,6 @@
 # Superteam Earn submission — "Create an App on Cookie Chain"
 
-Fill in the two URLs after deploying, then paste into the submission form.
+STATUS: submitted on Superteam 2026-09-09 (editable until deadline). Still to add via Edit Submission: tweet link + demo transaction.
 
 **Live application URL:** https://tiago-fl.github.io/payjar/
 **GitHub repository:** https://github.com/tiago-fl/payjar
