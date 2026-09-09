@@ -1,6 +1,6 @@
 # 🍪 CookiePay — payment links & on-chain receipts for Cookie Chain
 
-**Live app:** https://COOKIEPAY_LIVE_URL  
+**Live app:** https://tiago-fl.github.io/cookiepay/  
 **Network:** Cookie Chain (SVM) · RPC `https://rpc.cookiescan.io` · Explorer [cookiescan.io](https://cookiescan.io)
 
 CookiePay is a Solana-Pay-style payment tool built natively for Cookie Chain. A merchant, creator or friend
@@ -38,7 +38,7 @@ transaction itself, so the wallet's own RPC setting can never redirect a payment
 ## Run it locally
 
 ```bash
-git clone https://github.com/COOKIEPAY_REPO.git
+git clone https://github.com/tiago-fl/cookiepay.git
 cd cookiepay
 npm install
 npm run dev          # http://localhost:5173

@@ -2,8 +2,8 @@
 
 Fill in the two URLs after deploying, then paste into the submission form.
 
-**Live application URL:** https://COOKIEPAY_LIVE_URL
-**GitHub repository:** https://github.com/COOKIEPAY_REPO
+**Live application URL:** https://tiago-fl.github.io/cookiepay/
+**GitHub repository:** https://github.com/tiago-fl/cookiepay
 **Addresses used:** no custom program — composes genesis programs:
 System Program, SPL Token `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA`, Token-2022 `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb`,
 ATA `ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL`, Memo `MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr`,
@@ -22,7 +22,7 @@ Cookiebox aggregator plus a link to the bridge. Open source (MIT), static site, 
 
 ## What judges can try in 60 seconds
 
-1. https://COOKIEPAY_LIVE_URL → Create → recipient `book.cook`, 1 COOK, label "Test" → QR + link appear.
+1. https://tiago-fl.github.io/cookiepay/ → Create → recipient `book.cook`, 1 COOK, label "Test" → QR + link appear.
 2. Open the link, connect Nightly, click **Pay** → watch the timeline go sent → confirmed → finalized.
 3. Open the receipt link → amount, payer, memo, slot, fee, explorer link.
 4. Dashboard → incoming payments, 14-day chart, link statuses.

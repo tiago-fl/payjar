@@ -56,7 +56,7 @@ export default function App() {
       <footer className="footer">
         <span>Open source · MIT · built for the Cookie Chain cApp bounty</span>
         <span>
-          <a href="https://github.com/COOKIEPAY_REPO" target="_blank" rel="noreferrer">GitHub</a> ·{' '}
+          <a href="https://github.com/tiago-fl/cookiepay" target="_blank" rel="noreferrer">GitHub</a> ·{' '}
           <a href="https://docs.cookiechain.wtf" target="_blank" rel="noreferrer">Cookie Chain docs</a> ·{' '}
           <a href="https://hyperlane.cookiescan.io" target="_blank" rel="noreferrer">Bridge COOK</a>
         </span>
