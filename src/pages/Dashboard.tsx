@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { PublicKey } from '@solana/web3.js'
 import { NATIVE_MINT, connection, fmtTime, fmtUsd, formatUnits, shortAddr } from '../lib/chain'
-import { primaryName } from '../lib/names'
+import { primaryName, resolveRecipient } from '../lib/names'
 import { findSignatureByReference, incomingPayments, parseCookieMemo, paymentUrl, receiptUrl, type Transfer } from '../lib/payment'
 import { loadLinks, removeLink, updateLink, type SavedLink } from '../lib/store'
 import { cookUsdPrice, describeMint, type TokenInfo } from '../lib/tokens'
@@ -8,8 +9,28 @@ import { AddressLink, CopyButton, Spinner, TxLink } from '../components/ui'
 import { WalletButton } from '../components/WalletButton'
 import { useWallet } from '../components/WalletContext'
 
-export function Dashboard() {
-  const { publicKey } = useWallet()
+/** Dashboard for the connected wallet, or a read-only view of any address / .cook name via `?address=`. */
+export function Dashboard({ params }: { params: URLSearchParams }) {
+  const { publicKey: connected } = useWallet()
+  const viewParam = params.get('address')?.trim() ?? ''
+  const [viewKey, setViewKey] = useState<PublicKey | null>(null)
+  const [viewErr, setViewErr] = useState<string | null>(null)
+  useEffect(() => {
+    if (!viewParam) {
+      setViewKey(null)
+      setViewErr(null)
+      return
+    }
+    let alive = true
+    resolveRecipient(viewParam)
+      .then((r) => alive && setViewKey(r.address))
+      .catch((e) => alive && setViewErr(e instanceof Error ? e.message : String(e)))
+    return () => {
+      alive = false
+    }
+  }, [viewParam])
+  const publicKey = viewParam ? viewKey : connected
+  const readOnly = !!viewParam
   const [name, setName] = useState<string | null>(null)
   const [cook, setCook] = useState<bigint | null>(null)
   const [cookUsd, setCookUsd] = useState<number | null>(null)
@@ -77,8 +98,19 @@ export function Dashboard() {
       <div className="page narrow">
         <div className="card center">
           <h2>Your dashboard</h2>
-          <p className="muted">Connect a wallet to see incoming payments, totals and the status of the links you created.</p>
-          <WalletButton />
+          {viewErr ? (
+            <p className="error">{viewErr}</p>
+          ) : readOnly ? (
+            <p className="muted"><Spinner /> Resolving {viewParam}…</p>
+          ) : (
+            <>
+              <p className="muted">Connect a wallet to see incoming payments, totals and the status of the links you created.</p>
+              <WalletButton />
+              <p className="muted small" style={{ marginTop: 14 }}>
+                Or look up any address / .cook name: <a href="#/dashboard?address=book.cook">#/dashboard?address=book.cook</a>
+              </p>
+            </>
+          )}
         </div>
       </div>
     )
@@ -88,7 +120,7 @@ export function Dashboard() {
     <div className="page">
       <div className="dash-head">
         <div>
-          <span className="eyebrow">Dashboard</span>
+          <span className="eyebrow">{readOnly ? 'Public view' : 'Dashboard'}</span>
           <h1>{name ?? shortAddr(publicKey.toBase58(), 6)}</h1>
           <div className="muted mono small">{publicKey.toBase58()}</div>
         </div>

@@ -36,7 +36,7 @@ export default function App() {
   const page =
     route.path === '/pay' ? <Pay params={route.params} /> :
     route.path === '/receipt' ? <Receipt params={route.params} /> :
-    route.path === '/dashboard' ? <Dashboard /> :
+    route.path === '/dashboard' ? <Dashboard params={route.params} /> :
     <Home />
 
   return (
