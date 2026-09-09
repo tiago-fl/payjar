@@ -53,8 +53,9 @@ export function Receipt({ params }: { params: URLSearchParams }) {
       connection
         .getSignatureStatuses([signature])
         .then((s) => {
-          const st = s.value[0]?.confirmationStatus
-          if (st && alive) setStatus(st)
+          // Old signatures fall out of the recent-status cache: null status for a known tx means finalized.
+          const st = s.value[0]?.confirmationStatus ?? 'finalized'
+          if (alive) setStatus(st)
           if (st === 'finalized') clearInterval(id)
         })
         .catch(() => undefined)

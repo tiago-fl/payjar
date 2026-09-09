@@ -131,7 +131,7 @@ export function Dashboard({ params }: { params: URLSearchParams }) {
         <div className="stat">
           <div className="stat-label">COOK balance</div>
           <div className="stat-value">{cook !== null ? formatUnits(cook, 9, 4) : '…'}</div>
-          {cook !== null && cookUsd && <div className="muted small">≈ {fmtUsd(Number(formatUnits(cook, 9)) * cookUsd)}</div>}
+          {cook !== null && cookUsd && <div className="muted small">≈ {fmtUsd((Number(cook) / 1e9) * cookUsd)}</div>}
         </div>
         <div className="stat">
           <div className="stat-label">Incoming transfers</div>
@@ -232,7 +232,7 @@ function ActivityChart({ payments }: { payments: Transfer[] }) {
     const b = buckets.find((x) => x.day.getTime() === d.getTime())
     if (!b) continue
     b.count++
-    if (t.mint === NATIVE_MINT) b.cook += Number(formatUnits(t.amountRaw, 9))
+    if (t.mint === NATIVE_MINT) b.cook += Number(t.amountRaw) / 1e9
   }
   const max = Math.max(1, ...buckets.map((b) => b.count))
   const W = 560, H = 160, pad = 24

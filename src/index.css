@@ -92,7 +92,7 @@ input:focus { outline: 2px solid var(--accent); border-color: transparent; }
 .callout.warn { border-color: var(--warn); }
 .callout.success { border-color: var(--ok); }
 .copy-field { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; }
-.copy-field input { flex: 1; }
+.copy-field input { flex: 1; padding-right: 84px; text-overflow: ellipsis; }
 .copy-field { position: relative; }
 .copy-field .btn { position: absolute; right: 6px; bottom: 6px; }
 .copy-label { font-size: .8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
